@@ -6,4 +6,4 @@ const config = {
     database: 'postgres',
 }
 
-export default config
+export default config   
