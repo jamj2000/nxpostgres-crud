@@ -4,7 +4,21 @@ import config from './config.mjs'
 const { Client } = pg
 const client = new Client(config)
 
+/*
 
+// OTRA FORMA DE CREAR EL CLIENTE
+import pg from 'pg'
+const { Client } = pg
+
+const client = new Client({
+  connectionString: process.env.DATABASE_URL
+ 
+})
+
+// NECESITAMOS EDITAR EL ARCHIVO .env
+DATABASE_URL="postgres://usuario:contraseña@host:5432/basedatos?sslmode=require"
+
+*/
 
 const load = async () => {
     try {
