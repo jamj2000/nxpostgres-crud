@@ -1,12 +1,11 @@
 'use client'
 import { use } from "react"
 
+import Modal from "@/components/modal"
+import Form from "@/components/articulos/form"
 import Articulo from "@/components/articulos/item"
-import Modal from "@/components/Modal"
-import Form from "@/components/Form"
 
 import { newArticulo, editArticulo, deleteArticulo } from "@/lib/actions"
-
 
 
 function ListaArticulos({ articulos }) {
@@ -14,7 +13,7 @@ function ListaArticulos({ articulos }) {
 
     return (
         <>
-            <Modal openElement={<p className="text-right">NUEVO ARTICULO</p>}>
+            <Modal openElement={"NUEVO"}>
                 <Form action={newArticulo} title={"Nuevo artículo"} articulo={null} />
             </Modal>
 
@@ -22,10 +21,10 @@ function ListaArticulos({ articulos }) {
                 {
                     lista.map((articulo) => (
                         <Articulo key={articulo.id} articulo={articulo} >
-                            <Modal openElement={"EDITAR ARTICULO"}>
+                            <Modal openElement={"EDITAR"}>
                                 <Form action={editArticulo} title={"Editar artículo"} articulo={articulo} />
                             </Modal>
-                            <Modal openElement={"ELIMINAR ARTICULO"}>
+                            <Modal openElement={"ELIMINAR"}>
                                 <Form action={deleteArticulo} title={"Eliminar artículo"} articulo={articulo} disabled />
                             </Modal>
                         </Articulo>

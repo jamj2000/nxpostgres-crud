@@ -1,8 +1,14 @@
+// 'use client'
+
+// import { useActionState } from "react"
 
 function Form({ action, title, articulo, disabled = false }) {
 
+    // const [state, formAction, pending] = useActionState(action, {})
+
     return (
         <form action={action} >
+
             <input type='hidden' name='id' value={articulo?.id} />
 
             <fieldset disabled={disabled} className="flex flex-col">

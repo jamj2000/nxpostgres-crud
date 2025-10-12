@@ -6,7 +6,9 @@ function Articulo({ children, articulo }) {
             <p><strong>{articulo.nombre}</strong></p>
             <p>{articulo.descripcion}</p>
             <p>{articulo.precio} €</p>
-            {children}
+            <div className=" mt-4 flex gap-4 justify-end">
+                {children}
+            </div>
         </div>
     )
 }

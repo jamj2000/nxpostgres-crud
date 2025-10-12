@@ -1,6 +1,6 @@
 'use server'
 import { pool } from '@/lib/postgres'
-import { redirect } from 'next/navigation';
+import { revalidatePath } from 'next/cache';
 
 
 export async function getArticulos() {
@@ -9,7 +9,6 @@ export async function getArticulos() {
 
   try {
     const results = await pool.query('select * from articulos');
-    console.log(results.rows);
     return results.rows;
   } catch (error) {
     // console.log(error);  
@@ -29,7 +28,7 @@ export async function newArticulo(formData) {
   } catch (error) {
     console.log(error);
   }
-  redirect('/articulos');
+  revalidatePath('/articulos');
 }
 
 
@@ -46,7 +45,7 @@ export async function editArticulo(formData) {
   } catch (error) {
     console.log(error);
   }
-  redirect('/articulos');
+  revalidatePath('/articulos');
 }
 
 export async function deleteArticulo(formData) {
@@ -59,5 +58,5 @@ export async function deleteArticulo(formData) {
   } catch (error) {
     console.log(error);
   }
-  redirect('/articulos');
+  revalidatePath('/articulos');
 }
