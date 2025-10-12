@@ -1,11 +1,11 @@
-import pg from 'pg'
-import config from './config.mjs'
+// import pg from 'pg'
+// import config from './config.mjs'
 
-const { Client } = pg
-const client = new Client(config)
+// const { Client } = pg
+// const client = new Client(config)
 
 
-/*
+
 
 // OTRA FORMA DE CREAR EL CLIENTE
 import pg from 'pg'
@@ -18,7 +18,7 @@ const client = new Client({
 // NECESITAMOS EDITAR EL ARCHIVO .env
 // DATABASE_URL="postgres://usuario:contraseña@host:5432/basedatos?sslmode=require"
 
-*/
+
 
 
 const load = async () => {

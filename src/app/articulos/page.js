@@ -1,32 +1,15 @@
-import Link from 'next/link'
-import Articulo from '@/components/Articulo'
+import ListaArticulos from '@/components/articulos/lista'
 import { getArticulos } from '@/lib/actions'
+import { Suspense } from 'react'
 
-export const dynamic = 'force-dynamic'
 
 export default async function Home() {
-    const articulos = await getArticulos()
-    // console.log(articulos);
+    const articulos = getArticulos()
 
     return (
-        <div>
-            <Link className='enlace' href="/articulos/new"> Nuevo artículo </Link>
-            {
-                articulos.map((articulo) => (
-                    <Articulo key={articulo.id} articulo={articulo} >
-                        <Link
-                            className='enlace'
-                            href={{ pathname: '/articulos/edit', query: { id: articulo.id } }}>
-                            Editar artículo
-                        </Link>
-                        <Link
-                            className='enlace'
-                            href={{ pathname: '/articulos/delete', query: { id: articulo.id } }}>
-                            Eliminar artículo
-                        </Link>
-                    </Articulo>
-                ))
-            }
-        </div>
+        <Suspense fallback="Recuperando datos...">
+            <ListaArticulos articulos={articulos} />
+        </Suspense>
+
     )
 }

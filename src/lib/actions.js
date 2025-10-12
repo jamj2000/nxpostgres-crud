@@ -5,12 +5,14 @@ import { redirect } from 'next/navigation';
 
 export async function getArticulos() {
 
+  await new Promise(resolve => setTimeout(resolve, 1500))
+
   try {
     const results = await pool.query('select * from articulos');
     return results.rows;
   } catch (error) {
     // console.log(error);  
-    return null;    
+    return null;
   }
 }
 

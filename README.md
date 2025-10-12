@@ -1,39 +1,23 @@
-## Crear base de datos y lanzar aplicación
+# Operaciones CRUD en base de datos
 
-**Pasos**
+Para probar la aplicación en un entorno local sigue los siguientes pasos:
 
-1. Entrar en la siguiente carpeta:
+1. **Configura URL de base de datos en archivo .env**
 
-```sh
-cd src/database
-```
-
-2. Editar el archivo `config.mjs`:
+2. **Instala dependencias**
 
 ```sh
-nano  config.mjs
+npm  install
 ```
 
-3. Volver a la carpeta raíz del proyecto:
-
-```
-cd  ../..
-```
-
-
-4. Ejecutar script:
+3. **Introduce datos de prueba**
 
 ```sh
-npm run seed
+npm  run  seed
 ```
 
-4. Lanzar aplicación:
+4. **Ejecuta entorno de desarrollo**
 
 ```sh
-npm run dev
+npm  run  dev
 ```
-
-
-## Paquetes usados para Postgres de Vercel
-
-- `pg`
