@@ -9,8 +9,9 @@ export default function Modal({ openElement, children }) {
     const openModal = () => setIsOpen(true)
     const closeModal = () => setIsOpen(false)
 
-    // Cierre al hacer clic fuera del modal
+
     useEffect(() => {
+        // Cierre al hacer clic fuera del modal
         function handleClickOutside(event) {
             if (modalRef.current && !modalRef.current.contains(event.target)) {
                 closeModal()

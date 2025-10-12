@@ -7,9 +7,13 @@ export default async function Home() {
     const articulos = getArticulos()
 
     return (
-        <Suspense fallback="Recuperando datos...">
-            <ListaArticulos articulos={articulos} />
-        </Suspense>
+        <section>
+            <h1 className='text-xl'>Artículos</h1>
+            <hr />
 
+            <Suspense fallback="Recuperando datos...">
+                <ListaArticulos articulos={articulos} />
+            </Suspense>
+        </section>
     )
 }

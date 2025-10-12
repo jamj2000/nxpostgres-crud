@@ -1,24 +1,34 @@
 
-function Form({ action, title, articulo, disabled }) {
+function Form({ action, title, articulo, disabled = false }) {
 
     return (
         <form action={action} >
             <input type='hidden' name='id' value={articulo?.id} />
-            <fieldset disabled={disabled}>
+
+            <fieldset disabled={disabled} className="flex flex-col">
                 <label htmlFor='nombre'>Nombre</label>
-                <input type='text' id='nombre' name='nombre'
+                <input
+                    name='nombre'
                     placeholder='Nombre'
-                    defaultValue={articulo?.nombre} autoFocus ></input>
+                    defaultValue={articulo?.nombre} />
+
                 <label htmlFor='descripcion'>Descripción</label>
-                <input type='text' id='descripcion' name='descripcion'
+                <input
+                    name='descripcion'
                     placeholder='Descripción'
                     defaultValue={articulo?.descripcion} />
                 <label htmlFor='precio'>Precio</label>
-                <input type='number' id='precio' name='precio' min='0' step={0.01}
+
+                <input
+                    type='number'
+                    name='precio'
+                    min='0'
+                    step={0.01}
                     placeholder='precio'
                     defaultValue={articulo?.precio} />
             </fieldset>
-            <button type='submit'>{title}</button>
+
+            <button type='submit' autoFocus>{title}</button>
         </form>
     )
 }

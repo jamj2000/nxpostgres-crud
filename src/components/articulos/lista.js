@@ -1,32 +1,39 @@
 'use client'
-import Link from "next/link"
-import Articulo from "@/components/articulos/item"
 import { use } from "react"
+
+import Articulo from "@/components/articulos/item"
+import Modal from "@/components/Modal"
+import Form from "@/components/Form"
+
+import { newArticulo, editArticulo, deleteArticulo } from "@/lib/actions"
+
 
 
 function ListaArticulos({ articulos }) {
     const lista = use(articulos)
 
     return (
-        <div>
-            <Link className='enlace' href="/articulos/new"> Nuevo artículo </Link>
-            {
-                lista.map((articulo) => (
-                    <Articulo key={articulo.id} articulo={articulo} >
-                        <Link
-                            className='enlace'
-                            href={{ pathname: '/articulos/edit', query: { id: articulo.id } }}>
-                            Editar artículo
-                        </Link>
-                        <Link
-                            className='enlace'
-                            href={{ pathname: '/articulos/delete', query: { id: articulo.id } }}>
-                            Eliminar artículo
-                        </Link>
-                    </Articulo>
-                ))
-            }
-        </div>
+        <>
+            <Modal openElement={<p className="text-right">NUEVO ARTICULO</p>}>
+                <Form action={newArticulo} title={"Nuevo artículo"} articulo={null} />
+            </Modal>
+
+            <div className="flex flex-wrap gap-4">
+                {
+                    lista.map((articulo) => (
+                        <Articulo key={articulo.id} articulo={articulo} >
+                            <Modal openElement={"EDITAR ARTICULO"}>
+                                <Form action={editArticulo} title={"Editar artículo"} articulo={articulo} />
+                            </Modal>
+                            <Modal openElement={"ELIMINAR ARTICULO"}>
+                                <Form action={deleteArticulo} title={"Eliminar artículo"} articulo={articulo} disabled />
+                            </Modal>
+                        </Articulo>
+                    ))
+                }
+            </div>
+
+        </>
     )
 }
 

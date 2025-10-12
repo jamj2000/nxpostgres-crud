@@ -9,6 +9,7 @@ export async function getArticulos() {
 
   try {
     const results = await pool.query('select * from articulos');
+    console.log(results.rows);
     return results.rows;
   } catch (error) {
     // console.log(error);  
