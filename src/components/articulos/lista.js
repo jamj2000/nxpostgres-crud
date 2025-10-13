@@ -14,22 +14,20 @@ function ListaArticulos({ articulos }) {
     return (
         <>
             <Modal openElement={"NUEVO"}>
-                <Form action={newArticulo} title={"Nuevo artículo"} articulo={null} />
+                <Form action={newArticulo} title={"Crear artículo"} articulo={null} />
             </Modal>
 
             <div className="flex flex-wrap gap-4">
-                {
-                    lista.map((articulo) => (
-                        <Articulo key={articulo.id} articulo={articulo} >
-                            <Modal openElement={"EDITAR"}>
-                                <Form action={editArticulo} title={"Editar artículo"} articulo={articulo} />
-                            </Modal>
-                            <Modal openElement={"ELIMINAR"}>
-                                <Form action={deleteArticulo} title={"Eliminar artículo"} articulo={articulo} disabled />
-                            </Modal>
-                        </Articulo>
-                    ))
-                }
+                {lista.map((articulo) => (
+                    <Articulo key={articulo.id} articulo={articulo} >
+                        <Modal openElement={"EDITAR"}>
+                            <Form action={editArticulo} title={"Actualizar artículo"} articulo={articulo} />
+                        </Modal>
+                        <Modal openElement={"ELIMINAR"}>
+                            <Form action={deleteArticulo} title={"Eliminar artículo"} articulo={articulo} disabled />
+                        </Modal>
+                    </Articulo>
+                ))}
             </div>
 
         </>

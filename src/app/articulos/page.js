@@ -1,9 +1,10 @@
-import ListaArticulos from '@/components/articulos/lista'
-import { getArticulos } from '@/lib/actions'
 import { Suspense } from 'react'
+import { getArticulos } from '@/lib/data'
+import ListaArticulos from '@/components/articulos/lista'
 
 
-export default async function Home() {
+
+export default function Home() {
     const articulos = getArticulos()
 
     return (

@@ -1,30 +1,36 @@
-// 'use client'
-
-// import { useActionState } from "react"
+'use client'
+import { useActionState, useEffect, useId } from "react"
 
 function Form({ action, title, articulo, disabled = false }) {
 
-    // const [state, formAction, pending] = useActionState(action, {})
+    const formId = useId()
+    const [state, faction, pending] = useActionState(action, {})
+
+    useEffect(() => {
+        if (state?.success) {
+            // toast.success(state.success)
+            document.getElementById(formId)?.closest('dialog')?.close()
+        }
+    }, [state, formId])
 
     return (
-        <form action={action} >
-
+        <form action={faction} id={formId}>
             <input type='hidden' name='id' value={articulo?.id} />
 
-            <fieldset disabled={disabled} className="flex flex-col">
-                <label htmlFor='nombre'>Nombre</label>
+            <fieldset disabled={disabled} className="flex flex-col py-4">
+                <label htmlFor='nombre' className="mt-4">Nombre</label>
                 <input
                     name='nombre'
                     placeholder='Nombre'
                     defaultValue={articulo?.nombre} />
 
-                <label htmlFor='descripcion'>Descripción</label>
+                <label htmlFor='descripcion' className="mt-4">Descripción</label>
                 <input
                     name='descripcion'
                     placeholder='Descripción'
                     defaultValue={articulo?.descripcion} />
-                <label htmlFor='precio'>Precio</label>
 
+                <label htmlFor='precio' className="mt-4">Precio</label>
                 <input
                     type='number'
                     name='precio'

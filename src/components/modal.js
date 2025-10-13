@@ -1,65 +1,52 @@
 'use client'
-
-import { useRef, useEffect, useState } from 'react'
-
-export default function Modal({ openElement, children }) {
-    const [isOpen, setIsOpen] = useState(false)
-    const modalRef = useRef(null)
-
-    const openModal = () => setIsOpen(true)
-    const closeModal = () => setIsOpen(false)
+import { useRef } from 'react'
+// https://medium.com/@bomber.marek/how-to-use-dialog-in-react-easy-modals-tooltips-81e44d570c8a
 
 
-    useEffect(() => {
-        // Cierre al hacer clic fuera del modal
-        function handleClickOutside(event) {
-            if (modalRef.current && !modalRef.current.contains(event.target)) {
-                closeModal()
+
+const Modal = ({ children, openElement }) => {
+    const dialogRef = useRef(null);
+
+    const openDialog = () => dialogRef.current?.showModal()
+
+    const closeDialog = () => dialogRef.current?.close()
+
+    const handleClickOutside = (e) => {
+        if (dialogRef.current) {
+            const rect = dialogRef.current.getBoundingClientRect();
+            const isInDialog = (rect.top <= e.clientY
+                && e.clientY <= rect.top + rect.height
+                && rect.left <= e.clientX
+                && e.clientX <= rect.left + rect.width);
+            if (!isInDialog) {
+                dialogRef.current.close();
             }
         }
+    }
 
-        // Cierre al presionar Escape
-        function handleEscapeKey(event) {
-            if (event.key === 'Escape') {
-                closeModal()
-            }
-        }
-
-        if (isOpen) {
-            document.addEventListener('mousedown', handleClickOutside)
-            document.addEventListener('keydown', handleEscapeKey)
-        }
-
-        return () => {
-            document.removeEventListener('mousedown', handleClickOutside)
-            document.removeEventListener('keydown', handleEscapeKey)
-        }
-    }, [isOpen])
 
     return (
         <>
-            <div onClick={openModal}>
+            <div onClick={openDialog}>
                 {openElement}
             </div>
 
-            {isOpen && (
-                <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm">
-                    <div
-                        ref={modalRef}
-                        className="absolute bg-white w-[90%] lg:w-[60%] max-h-[90vh] overflow-y-auto rounded-md shadow-lg py-8 px-4 md:px-10"
-                    >
-                        <button
-                            onClick={closeModal}
-                            className="absolute top-4 right-4 text-xl font-bold hover:text-red-600"
-                            aria-label="Cerrar modal"
-                        >
-                            ❌
-                        </button>
 
-                        {children}
-                    </div>
+            <dialog
+                ref={dialogRef}
+                onMouseDown={handleClickOutside}
+                className="m-auto backdrop:bg-black/50 backdrop:backdrop-blur-none w-[90%] lg:w-[60%] py-12 px-2 md:px-8 rounded-md outline-none">
+
+                {children}
+
+                <div onClick={closeDialog} className="absolute top-4 right-4 cursor-pointer" >
+                    ❌
                 </div>
-            )}
+            </dialog>
+
+
         </>
-    )
-}
+    );
+};
+
+export default Modal;
